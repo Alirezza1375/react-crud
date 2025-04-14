@@ -127,7 +127,10 @@
   font-family: 'Poppins', sans-serif;
   font-weight: 400;
 }
-
+.text {
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
 .button-container {
   width: 30%;
   display: flex;
@@ -153,7 +156,7 @@
 .color-button:hover,
 .edit-button:hover {
   transform: scale(0.95);
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); 
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
   text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
   color: white;
   transition: all 0.3s ease;
@@ -177,9 +180,9 @@
 
 
 .color-button:hover {
-  background: linear-gradient(to left, violet, indigo, blue, green, yellow, orange, red); 
+  background: linear-gradient(to left, violet, indigo, blue, green, yellow, orange, red);
 }
 
 .edit-button:hover {
-  background-color: green; 
+  background-color: green;
 }
