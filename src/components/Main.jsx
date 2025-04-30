@@ -2,15 +2,15 @@ import React, { useState } from "react";
 import { v4 as uuidv4 } from "uuid";
 import Input from "./Kit/Input";
 import Button from "./Kit/Button";
-import Chip from "@mui/material/Chip";
+import Dropdown from "./Kit/Dropdown";
 import "/src/index.css";
 
 export default function Main() {
   const [editingContact, setEditingContact] = useState(null);
   const [inputValue, setInputValue] = useState("");
   const [contacts, setContacts] = useState([]);
-  const [selectedItem, setSelectedItem] = useState([]);
   const [isEmptyValue, setIsEmptyValue] = useState(false);
+  const [isOpen, setIsOpen] = useState(false);
 
   const handleKeyDown = (e) => {
     if (e.key === "Enter") {
@@ -107,18 +107,6 @@ export default function Main() {
       Cities: [{ name: "Bushehr" }, { name: "Jam" }, { name: "Bank" }],
     },
   ];
-
-  const handleSelectedItems = (index) => {
-    provinces.map((p, i) => {
-      if (index === i) {
-        setSelectedItem((previtem) => [...previtem, p.name]);
-      }
-    });
-  };
-
-  const handleItemDelete = (i) => {
-    setSelectedItem(selectedItem.filter((_, index) => i !== index));
-  };
 
   return (
     <main className="mt-6">
@@ -218,6 +206,54 @@ export default function Main() {
           </li>
         ))}
       </ul>
+
+      <div className="mt-[25px] flex items-center flex-col">
+        <button
+          onClick={() => setIsOpen(!isOpen)}
+          className="text-[#E5E7EB] text-[16px] cursor-pointer bg-[#1F2937] hover:bg-[#374151] max-w-[120px] border-[3px] border[#EAB308] 
+            shadow-md font-medium rounded-full text-sm px-[25px] py-[15px] text-center flex gap-[5px] items-center hover:font-[800]   
+            active:transition-all active:scale-[0.95] active:ease-in-out"
+          type="button"
+        >
+          {isOpen ? "Close" : "Open"}
+          <svg
+            className="w-[20px] h-[20px] ms-3"
+            aria-hidden="true"
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 10 6"
+          >
+            <path
+              stroke="currentColor"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth="1"
+              d="m1 1 4 4 4-4"
+            />
+          </svg>
+        </button>
+
+        {isOpen && (
+          <ul className="px-[10px] mt-[5px] w-[120px] border border-[#000000] overflow-hidden transition-all duration-[0.5s] ease-in-out">
+            {contacts.filter((contact) => contact.isFavorit).length > 0 ? (
+              contacts
+                .filter((contact) => contact.isFavorit)
+                .map((contact) => (
+                  <li
+                    className="list-none my-[5px] font-bold text-[17px] flex justify-center"
+                    key={contact.id}
+                  >
+                    {contact.name}
+                  </li>
+                ))
+            ) : (
+              <p className="font-bold text-center]">
+                No favorite contacts yet!
+              </p>
+            )}
+          </ul>
+        )}
+      </div>
     </main>
   );
 }
