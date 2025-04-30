@@ -207,15 +207,15 @@ export default function Main() {
         ))}
       </ul>
 
-      <div className="mt-[25px] flex items-center flex-col">
+      <div className="my-[25px] flex items-center flex-col">
         <button
           onClick={() => setIsOpen(!isOpen)}
-          className="text-[#E5E7EB] text-[16px] cursor-pointer bg-[#1F2937] hover:bg-[#374151] max-w-[120px] border-[3px] border[#EAB308] 
+          className="text-[#E5E7EB] text-[16px] cursor-pointer bg-[#1F2937] hover:bg-[#374151] max-w-[170px] border-[3px] border[#EAB308] 
             shadow-md font-medium rounded-full text-sm px-[25px] py-[15px] text-center flex gap-[5px] items-center hover:font-[800]   
             active:transition-all active:scale-[0.95] active:ease-in-out"
           type="button"
         >
-          {isOpen ? "Close" : "Open"}
+          {isOpen ? "Close Favs" : "Open Favs"}
           <svg
             className="w-[20px] h-[20px] ms-3"
             aria-hidden="true"
@@ -234,21 +234,51 @@ export default function Main() {
         </button>
 
         {isOpen && (
-          <ul className="px-[10px] mt-[5px] w-[120px] border border-[#000000] overflow-hidden transition-all duration-[0.5s] ease-in-out">
+          <ul className="px-[10px] mt-[5px] w-[120px] border border-[#000000] overflow-hidden transition-all duration-[3000ms] ease-in-out">
             {contacts.filter((contact) => contact.isFavorit).length > 0 ? (
               contacts
                 .filter((contact) => contact.isFavorit)
                 .map((contact) => (
                   <li
-                    className="list-none my-[5px] font-bold text-[17px] flex justify-center"
+                    className="list-none my-[5px] font-bold text-[17px] flex justify-evenly items-center border border-[#1F2937] rounded-full"
                     key={contact.id}
                   >
-                    {contact.name}
+                    <div>
+                      <p>{contact.name}</p>
+                    </div>
+                    <div>
+                      <Button
+                        onClick={() => toggleFavorit(contact)}
+                        className="w-[35px] max-h-[35px] border-none rounded-full bg-[#ffffff] cursor-pointer 
+                                hover:transition hover:duration-300 hover:scale-[0.95] hover:ease-in-out hover:shadow-[0 4px 8px rgba(0, 0, 0, 0.2)]
+                                active:shadow-[0 4px 8px rgba(0, 0, 0, 0.2)] active:transform active:scale-[1.2] active:duration-300 hover:bg-[#F1E3A4]
+                                active:transition-all active:ease-in-out"
+                      >
+                        <svg
+                          className="ms-3 text-gray-300 dark:text-gray-500"
+                          aria-hidden="true"
+                          xmlns="http://www.w3.org/2000/svg"
+                          fill="currentColor"
+                          viewBox="0 0 22 20"
+                        >
+                          <path
+                            fill={
+                              contact.isFavorit === true ? "yellow" : "white"
+                            }
+                            strokeWidth="0.7"
+                            stroke="black"
+                            d="M20.924 7.625a1.523 1.523 0 0 0-1.238-1.044l-5.051-.734-2.259-4.577a1.534 1.534 0 0 0-2.752 0L7.365 
+                              5.847l-5.051.734A1.535 1.535 0 0 0 1.463 9.2l3.656 3.563-.863 5.031a1.532 1.532 0 0 0 2.226 1.616L11 
+                              17.033l4.518 2.375a1.534 1.534 0 0 0 2.226-1.617l-.863-5.03L20.537 9.2a1.523 1.523 0 0 0 .387-1.575Z"
+                          />
+                        </svg>
+                      </Button>
+                    </div>
                   </li>
                 ))
             ) : (
-              <p className="font-bold text-center]">
-                No favorite contacts yet!
+              <p className="text-[14px] text-center] font-[800]">
+                No favorite contact yet!
               </p>
             )}
           </ul>

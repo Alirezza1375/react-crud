@@ -4,7 +4,7 @@ import { Fragment } from "react";
 
 function App() {
   return (
-    <div className="box-border m-0">
+    <div className="box-border ">
       <Fragment>
         <Header />
         <Main />
